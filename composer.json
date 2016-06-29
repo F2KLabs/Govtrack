@@ -1,0 +1,21 @@
+{
+  "name": "f2klabs/govtrack",
+  "description": "API Wrapper Package for GovTracks.com",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthew Moore",
+      "email": "matthew.moore@f2klabs.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "F2klabs\\Govtrack\\": "src"
+    }
+  }
+}
