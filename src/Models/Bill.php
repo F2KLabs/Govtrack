@@ -21,17 +21,6 @@ class Bill extends Base {
         $this->attributes = $this->find($id);
     }
 
-    public function __get($attr)
-    {
-        if(is_array($this->attributes->attr))
-            return Collection::make($this->attributes->attr);
 
-        return ($this->attributes->$attr)?: null;
-    }
-
-    public static function all()
-    {
-        return Collection::make(self::search());
-    }
 
 }

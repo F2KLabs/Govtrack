@@ -23,28 +23,51 @@ class Base {
         $this->request = $this->getRequest();
     }
 
+    /**
+     * @return static
+     */
+    public static function all()
+    {
+        return Collection::make(self::search());
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function find($id){
         $response = new Response($this->request->get('bill', $id));
         return $response->getContents();
     }
 
+    /**
+     * @return Request
+     */
+    protected function getRequest()
+    {
+        return ($this->request)?: new Request();
+    }
+
+    /**
+     * @param $attr
+     * @return null|static
+     */
+    public function __get($attr)
+    {
+        if(is_array($this->attributes->{$attr}))
+            return Collection::make($this->attributes->{$attr});
+
+        return ($this->attributes->{$attr})?: null;
+    }
+
+    /**
+     * @param array $options
+     * @return mixed
+     */
     public static function search($options = []){
         $request = new Request();
         $response = new Response($request->search('bill', $options));
 
         return $response->getContents()->objects;
-    }
-
-    public function getRequest()
-    {
-        return ($this->request)?: new Request();
-    }
-
-    public function __get($attr){
-        return ($this->params[$attr]) ?: null;
-    }
-
-    public function __set($key, $value){
-        $this->params[$key] = $value;
     }
 }
