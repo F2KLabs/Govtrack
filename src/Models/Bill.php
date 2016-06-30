@@ -7,7 +7,6 @@
  */
 
 namespace F2klabs\Govtrack\Models;
-use F2klabs\Govtrack\Tracker;
 use Illuminate\Support\Collection;
 
 class Bill extends Base {
