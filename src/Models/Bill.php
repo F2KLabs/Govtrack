@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 
 class Bill extends Base {
 
-    public $attributes;
+    public $endpoint = 'bill';
 
     public function __construct($id)
     {
@@ -19,6 +19,15 @@ class Bill extends Base {
 
         //TODO: Need to do some form of error handling here.
         $this->attributes = $this->find($id);
+    }
+
+    public function sponsor()
+    {
+        return new Person($this->sponsor->id);
+    }
+
+    public static function all(){
+        return Collection::make(self::search('bill'));
     }
 
 

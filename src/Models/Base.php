@@ -14,29 +14,23 @@ use F2klabs\Govtrack\response\Response;
 
 class Base {
 
-    public $params;
+    public $attributes;
+    public $request;
 
     public $last_search_params;
-    public $request;
+
 
     public function __construct(){
         $this->request = $this->getRequest();
     }
 
-    /**
-     * @return static
-     */
-    public static function all()
-    {
-        return Collection::make(self::search());
-    }
 
     /**
      * @param $id
      * @return mixed
      */
     public function find($id){
-        $response = new Response($this->request->get('bill', $id));
+        $response = new Response($this->request->get($this->endpoint, $id));
         return $response->getContents();
     }
 
@@ -64,9 +58,9 @@ class Base {
      * @param array $options
      * @return mixed
      */
-    public static function search($options = []){
+    public static function search($endpoint, $options = []){
         $request = new Request();
-        $response = new Response($request->search('bill', $options));
+        $response = new Response($request->search($endpoint, $options));
 
         return $response->getContents()->objects;
     }
