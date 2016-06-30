@@ -12,6 +12,9 @@ use \GuzzleHttp\Client;
 
 class Request {
 
+    /**
+     * Guzzle Client
+     */
     public $client;
 
     public function __construct(){

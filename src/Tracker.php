@@ -20,14 +20,13 @@ class Tracker {
 
     public static function bill($id){
         $response = new Response(self::getRequest()->get('bill', $id));
-
-        dd($response);
+        return $response->getContents();
     }
 
     public static function bills($options = []){
         $response = new Response(self::getRequest()->search('bill', $options));
 
-        dd($response->getContents());
+        return $response->getContents();
     }
 
 
